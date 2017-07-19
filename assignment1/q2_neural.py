@@ -36,11 +36,27 @@ def forward_backward_prop(data, labels, params, dimensions):
     b2 = np.reshape(params[ofs:ofs + Dy], (1, Dy))
 
     ### YOUR CODE HERE: forward propagation
-    raise NotImplementedError
+    z1 = np.dot(data, W1) + b1
+    h = sigmoid(z1)
+    y = softmax(np.dot(h, W2) + b2)
+    # print y.shape
+    # print labels.shape
+
+    cost = -np.sum(np.multiply(np.log(y),labels))
     ### END YOUR CODE
 
     ### YOUR CODE HERE: backward propagation
-    raise NotImplementedError
+    # print W2.shape
+    delta1 = y-labels
+
+    gradW2 = np.dot(h.transpose(), delta1)
+    gradb2 = np.sum(delta1, axis=0)
+
+    delta2 = np.multiply(np.dot(delta1, W2.transpose()), sigmoid_grad(h))
+    gradW1 = np.dot(data.transpose(), delta2)
+    gradb1 = np.sum(delta2, axis=0)
+
+
     ### END YOUR CODE
 
     ### Stack gradients (do not modify)

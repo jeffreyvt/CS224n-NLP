@@ -35,7 +35,7 @@ def sigmoid_grad(s):
     """
 
     ### YOUR CODE HERE
-    ds = np.multiply(s, (1 - s))
+    ds = np.multiply(s, (1 - s)) # uses the pre-computed sigmoid values.
     ### END YOUR CODE
 
     return ds
